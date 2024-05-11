@@ -1,0 +1,20 @@
+[
+  {
+    "params": {
+      "component": "button"
+    },
+    "props": {
+      "title": "Button",
+      "text": "Click the Button"
+    }
+  },
+  {
+    "params": {
+      "component": "switch"
+    },
+    "props": {
+      "title": "Switch",
+      "text": "Toggle the Switch"
+    }
+  }
+]
