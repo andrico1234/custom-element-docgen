@@ -24,9 +24,15 @@ class TestButton extends LitElement {
     :host {
       display: inline-block;
     }
-
+    
     button {
       color: var(--text-color);
+      font-size: 22px;
+      padding: 8px;
+    }
+
+    button[disabled] {
+      cursor: not-allowed;
     }
   `;
 

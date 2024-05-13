@@ -1,5 +1,7 @@
 ---
 import Sidebar from 'virtual:components/Sidebar'
+import '../prism/prism.js'
+import '../prism/prism.css'
 
 const { title, navigation } = Astro.props;
 ---
@@ -7,13 +9,49 @@ const { title, navigation } = Astro.props;
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- conditionally import this css to ensure that the styles don't clash with another project's -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+      
     />
-    <style>
+    <style is:global>
+      :root {
+        font-size: 16px;
+
+        --pico-code-color: #969eaf;
+        --pico-code-tag: #bb972c;
+        --pico-code-attr: #c784b7;
+        --pico-code-value: #71a4a1;
+        --pico-code-comment: #6f7887;
+      }
       body {
         padding: 32px;
+      }
+
+      code {
+        width: 100%;
+        padding: 16px;
+      }
+
+      tr > th {
+        min-width: 15ch;
+      }
+
+      tr > th:last-child {
+        min-width: 50ch;
+      }
+
+      pre {
+        margin-bottom: 0;
+      }
+
+      pre>code {
+        padding: 0;
+      }
+
+      h2 {
+        --pico-typography-spacing-top: 2rem;
       }
       .with-sidebar {
         display: flex;
@@ -29,18 +67,25 @@ const { title, navigation } = Astro.props;
         flex-basis: 0;
         flex-grow: 999;
       }
+
+      summary {
+        font-weight: 600;
+      }
+
+      ul > li {
+        padding-left: 16px;
+      }
     </style>
+    <script is:inline src="../integrations/prism/prism.js"></script>
   </head>
-  <body class="with-sidebar">
+  <body class="with-sidebar container">
     <div class="sidebar">
       <Sidebar navigation={navigation} />
     </div>
     <div class="not-sidebar">
-      <main class="container">
+      <main >
         <h1>{title}</h1>
-        <article>
           <slot /> <!-- your content is injected here -->
-        </article>
       </main>
     </div>
   </body>

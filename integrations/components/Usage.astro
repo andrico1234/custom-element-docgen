@@ -11,10 +11,15 @@ const { usage } = Astro.props;
   return <div>
     <h3>{u.name}</h3>
     <p>{u.description}</p>
-    <div set:html={u.snippet}></div>
-    <p>Code Snippet</p>
-    <pre>
-      <code>{u.snippet}</code>
-    </pre>
+    <article class="component">
+      <div set:html={u.snippet}></div>
+      <footer>
+        <pre>
+          <code class="language-html">
+            {u.snippet}
+          </code>
+        </pre>
+      </footer>
+    </article>
   </div>
 })}

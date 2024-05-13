@@ -34,14 +34,27 @@ export async function withUsageData(data: any[], {
   for await (const page of data) {
     const usage = usages.find((u) => {
       return u.tag === page.props.component.tagName;
-    }) ?? [];
+    });
 
+    if (!usage) {
+      continue;
+    }
+
+    const formattedUsages = usage.usages.map((u) => {
+      return {
+        ...u,
+        snippet: u.snippet.trim()
+      };
+    });
 
     updatedData.push({
       ...page,
       props: {
         ...page.props,
-        usage
+        usage: {
+          ...usage,
+          usages: formattedUsages
+        }
       }
     })
   }

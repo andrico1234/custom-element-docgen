@@ -1,27 +1,19 @@
 ---
+import { toCodes } from 'astro:i18n';
 import data from '../data.json'
 import Layout from 'virtual:components/Layout'
 import Usage from 'virtual:components/Usage'
+import { Debug } from 'astro:components';
 
 export async function getStaticPaths() {
   return data
 }
 
 const { component, navigation, usage } = Astro.props;
-
-// component.cssProperties
-// component.customElement
-// component.events
-// component.kind
-// component.name
-// component.slots
-// component.summary
-// component.tagName
-
 ---
-<Layout title={component.name} navigation={navigation}>
+<Layout title={`${component.name} - <${component.tagName}>`} navigation={navigation}>
   <p>
-    &lt;{component.tagName}&gt; - {component.summary}
+    {component.summary}
   </p>
   
   {Boolean(usage.usages.length) && (
@@ -29,33 +21,85 @@ const { component, navigation, usage } = Astro.props;
   )}  
 
   <h2>Attributes</h2>
-  {component.attributes.map((attribute) => {
-    return <div style="margin-bottom:1em">
-    <div>
-        name: {attribute.name}
-      </div>
-      <div>
-        description: {attribute.description ?? '-'}
-      </div>
-      <div>
-        type: {attribute.type.text}
-      </div>
-      <div>
-        fieldName: {attribute.fieldName}
-      </div>
-    </div>
-  })}
+  <table>
+    <thead>
+      <th scope="col">Name</th>
+      <th scope="col">Type</th>
+      <th scope="col">Description</th>
+    </thead>
+    <tbody>
+      {component.attributes.map((attribute) => {
+        return <tr>
+          <th scope="row">{attribute.name}</th>
+          <td>{attribute.type.text}</td>
+          <td>{attribute.description ?? '-'}</td>
+        </tr>
+      })}
+    </tbody>
+  </table>
+
+  <h2>Slots</h2>
+  <table>
+    <thead>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+    </thead>
+    <tbody>
+      {component.slots.map((slot) => {
+        return <tr>
+          <th scope="row">{slot.name}</th>
+          <td>{slot.description ?? '-'}</td>
+        </tr>
+      })}
+    </tbody>
+  </table>
+
+  <h2>CSS Properties</h2>
+  <table>
+    <thead>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+    </thead>
+    <tbody>
+      {component.cssProperties.map((property) => {
+        return <tr>
+          <th scope="row">{property.name}</th>
+          <td>{property.description ?? '-'}</td>
+        </tr>
+      })}
+    </tbody>
+  </table>
 
   <h2>CSS Parts</h2>
-  {component.cssParts.map((part) => {
-    return <div>
-      <div>
-        part: {part.name}
-      </div>
-      <div>
-        description: {part.description ?? '-'}
-      </div>
-    </div>
-  })}
+  <table>
+    <thead>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+    </thead>
+    <tbody>
+      {component.cssParts.map((part) => {
+        return <tr>
+          <th scope="row">{part.name}</th>
+          <td>{part.description ?? '-'}</td>
+        </tr>
+      })}
+    </tbody>
+  </table>
+
+  <h2>Events</h2>
+  <table>
+    <thead>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+    </thead>
+    <tbody>
+      {component.events.map((event) => {
+        return <tr>
+          <th scope="row">{event.name}</th>
+          <td>{event.description ?? '-'}</td>
+        </tr>
+      })}
+    </tbody>
+  </table>
 </Layout>
   

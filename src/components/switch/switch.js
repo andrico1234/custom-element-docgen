@@ -47,10 +47,11 @@ class TestSwitch extends LitElement {
     .switch {
       position: relative;
       display: block;
-      border: 2px solid black;
+      border: 2px solid green;
       border-radius: 12px;
       height: 20px;
       width: 40px;
+      background: var(--track-color);
     }
 
     .thumb {
@@ -74,7 +75,7 @@ class TestSwitch extends LitElement {
 
     /* Add your custom CSS properties here */
     :host {
-      --track-color: #000;
+      --track-color: white;
     }
   `;
 

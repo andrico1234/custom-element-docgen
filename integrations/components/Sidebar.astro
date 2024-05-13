@@ -9,15 +9,17 @@ interface Props {
 }
 
 const { navigation } = Astro.props;
----
 
+const currentPath = Astro.url.pathname
+---
 <aside>
   <nav>
-    <h2 id="starlight__on-this-page">Components</h2>
+    <summary>Components</summary>
     <ul>
       {navigation.items.map((item)=> {
+        // TODO: get current page
         return <li>
-          <a href={item.slug}>{item.label}</a>
+          <a aria-current={currentPath === item.slug ? true : undefined} href={item.slug}>{item.label}</a>
         </li>
       })}
     </ul>

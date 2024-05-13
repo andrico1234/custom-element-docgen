@@ -1,7 +1,7 @@
 export type Usage = {
   title: string;
   description: string;
-  code: string;
+  snippet: string;
   tag: string;
 }
 

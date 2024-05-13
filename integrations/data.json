@@ -105,7 +105,7 @@
           {
             "name": "Regular Button",
             "description": "How to use the button",
-            "snippet": "\n    <test-button title=\"Click me\"></test-button>\n  "
+            "snippet": "<test-button title=\"Click me\"></test-button>\n    <test-button disabled title=\"Click me\"></test-button>"
           }
         ]
       }
