@@ -20,8 +20,6 @@ export function vitePluginCreateVirtualModules(
   const resolveId = (id: string) =>
     JSON.stringify(id.startsWith('.') ? resolve(fileURLToPath(root), id) : id);
 
-  console.log(root);
-
   const virtualComponentModules = Object.fromEntries(
     Object.entries(opts.components).map(([name, path]) => [
       `virtual:components/${name}`,
@@ -41,8 +39,6 @@ export function vitePluginCreateVirtualModules(
       key,
     ])
   );
-
-  console.log('modules', modules)
 
   return {
     name: 'vite-plugin-create-virtual-modules',

@@ -1,0 +1,61 @@
+---
+import data from '../data.json'
+import Layout from 'virtual:components/Layout'
+import Usage from 'virtual:components/Usage'
+
+export async function getStaticPaths() {
+  return data
+}
+
+const { component, navigation, usage } = Astro.props;
+
+// component.cssProperties
+// component.customElement
+// component.events
+// component.kind
+// component.name
+// component.slots
+// component.summary
+// component.tagName
+
+---
+<Layout title={component.name} navigation={navigation}>
+  <p>
+    &lt;{component.tagName}&gt; - {component.summary}
+  </p>
+  
+  {Boolean(usage.usages.length) && (
+    <Usage usage={usage} />
+  )}  
+
+  <h2>Attributes</h2>
+  {component.attributes.map((attribute) => {
+    return <div style="margin-bottom:1em">
+    <div>
+        name: {attribute.name}
+      </div>
+      <div>
+        description: {attribute.description ?? '-'}
+      </div>
+      <div>
+        type: {attribute.type.text}
+      </div>
+      <div>
+        fieldName: {attribute.fieldName}
+      </div>
+    </div>
+  })}
+
+  <h2>CSS Parts</h2>
+  {component.cssParts.map((part) => {
+    return <div>
+      <div>
+        part: {part.name}
+      </div>
+      <div>
+        description: {part.description ?? '-'}
+      </div>
+    </div>
+  })}
+</Layout>
+  

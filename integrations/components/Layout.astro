@@ -1,5 +1,7 @@
 ---
-const { title } = Astro.props;
+import Sidebar from 'virtual:components/Sidebar'
+
+const { title, navigation } = Astro.props;
 ---
 <html lang="en">
   <head>
@@ -9,14 +11,37 @@ const { title } = Astro.props;
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
     />
-  </head>
-  <body>
-    <main class="container">
+    <style>
+      body {
+        padding: 32px;
+      }
+      .with-sidebar {
+        display: flex;
+        flex-wrap: wrap;
+      }
 
-      <h1>{title} (Default Integration Layout)</h1>
-      <article>
-        <slot /> <!-- your content is injected here -->
-      </article>
-    </main>
+      .sidebar {
+        flex-basis: 200px;
+        flex-grow: 1;
+      }
+
+      .not-sidebar {
+        flex-basis: 0;
+        flex-grow: 999;
+      }
+    </style>
+  </head>
+  <body class="with-sidebar">
+    <div class="sidebar">
+      <Sidebar navigation={navigation} />
+    </div>
+    <div class="not-sidebar">
+      <main class="container">
+        <h1>{title}</h1>
+        <article>
+          <slot /> <!-- your content is injected here -->
+        </article>
+      </main>
+    </div>
   </body>
 </html>

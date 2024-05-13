@@ -1,0 +1,232 @@
+[
+  {
+    "params": {
+      "component": "test-button"
+    },
+    "props": {
+      "component": {
+        "kind": "class",
+        "description": "",
+        "name": "TestButton",
+        "cssProperties": [
+          {
+            "description": "Controls the color of the button",
+            "name": "--text-color"
+          }
+        ],
+        "cssParts": [
+          {
+            "description": "Styles the color of the button",
+            "name": "button"
+          }
+        ],
+        "slots": [
+          {
+            "description": "You can put an icon in here",
+            "name": "icon"
+          }
+        ],
+        "members": [
+          {
+            "kind": "method",
+            "name": "handleClick"
+          },
+          {
+            "kind": "field",
+            "name": "disabled",
+            "privacy": "public",
+            "type": {
+              "text": "boolean"
+            },
+            "description": "disables the button",
+            "attribute": "disabled",
+            "reflects": true
+          },
+          {
+            "kind": "field",
+            "name": "title",
+            "privacy": "public",
+            "type": {
+              "text": "string"
+            },
+            "attribute": "title"
+          }
+        ],
+        "events": [
+          {
+            "name": "click",
+            "type": {
+              "text": "Event"
+            },
+            "description": "click event"
+          }
+        ],
+        "attributes": [
+          {
+            "type": {
+              "text": "boolean"
+            },
+            "description": "disables the button",
+            "name": "disabled",
+            "fieldName": "disabled"
+          },
+          {
+            "name": "title",
+            "type": {
+              "text": "string"
+            },
+            "fieldName": "title"
+          }
+        ],
+        "superclass": {
+          "name": "LitElement",
+          "package": "lit"
+        },
+        "tagName": "test-button",
+        "summary": "This is the button element for the custom library",
+        "customElement": true
+      },
+      "navigation": {
+        "items": [
+          {
+            "label": "TestButton",
+            "slug": "/components/test-button"
+          },
+          {
+            "label": "TestSwitch",
+            "slug": "/components/test-switch"
+          }
+        ]
+      },
+      "usage": {
+        "tag": "test-button",
+        "registerPath": "/Users/andriccokaroulla/Documents/Coding/component-odyssey/wc-doc-gen/src/components/button/button.js",
+        "usages": [
+          {
+            "name": "Regular Button",
+            "description": "How to use the button",
+            "snippet": "\n    <test-button title=\"Click me\"></test-button>\n  "
+          }
+        ]
+      }
+    }
+  },
+  {
+    "params": {
+      "component": "test-switch"
+    },
+    "props": {
+      "component": {
+        "kind": "class",
+        "description": "",
+        "name": "TestSwitch",
+        "cssProperties": [
+          {
+            "description": "Controls the color of the track",
+            "name": "--track-color"
+          }
+        ],
+        "cssParts": [
+          {
+            "description": "Styles the color of the container",
+            "name": "container"
+          }
+        ],
+        "slots": [
+          {
+            "description": "You can override the thumb",
+            "name": "thumb"
+          }
+        ],
+        "members": [
+          {
+            "kind": "field",
+            "name": "handleClick"
+          },
+          {
+            "kind": "field",
+            "name": "disabled",
+            "privacy": "public",
+            "type": {
+              "text": "boolean"
+            },
+            "default": "false",
+            "description": "disables the elememnt",
+            "attribute": "disabled"
+          },
+          {
+            "kind": "field",
+            "name": "isToggled",
+            "privacy": "public",
+            "type": {
+              "text": "boolean"
+            },
+            "default": "false",
+            "description": "sets the toggled state of the component",
+            "attribute": "isToggled"
+          }
+        ],
+        "events": [
+          {
+            "type": {
+              "text": "Event"
+            },
+            "description": "change event",
+            "name": "change"
+          }
+        ],
+        "attributes": [
+          {
+            "type": {
+              "text": "boolean"
+            },
+            "description": "disables the elememnt",
+            "name": "disabled",
+            "default": "false",
+            "fieldName": "disabled"
+          },
+          {
+            "type": {
+              "text": "boolean"
+            },
+            "description": "sets the toggled state of the component",
+            "name": "isToggled",
+            "default": "false",
+            "fieldName": "isToggled"
+          }
+        ],
+        "superclass": {
+          "name": "LitElement",
+          "package": "lit"
+        },
+        "tagName": "test-switch",
+        "summary": "This is the switch element for the custom library",
+        "customElement": true
+      },
+      "navigation": {
+        "items": [
+          {
+            "label": "TestButton",
+            "slug": "/components/test-button"
+          },
+          {
+            "label": "TestSwitch",
+            "slug": "/components/test-switch"
+          }
+        ]
+      },
+      "usage": {
+        "tag": "test-switch",
+        "registerPath": "/Users/andriccokaroulla/Documents/Coding/component-odyssey/wc-doc-gen/src/components/switch/switch.js",
+        "usages": [
+          {
+            "name": "Checkbox",
+            "description": "How to use the checkbox",
+            "snippet": "<test-switch></test-switch>\n<test-switch></test-switch>",
+            "tag": "test-switch"
+          }
+        ]
+      }
+    }
+  }
+]

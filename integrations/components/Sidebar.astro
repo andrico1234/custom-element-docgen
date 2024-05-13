@@ -1,0 +1,25 @@
+---
+interface Props {
+  navigation: {
+    items: {
+      label: string;
+      slug: string;
+    }[]
+  }
+}
+
+const { navigation } = Astro.props;
+---
+
+<aside>
+  <nav>
+    <h2 id="starlight__on-this-page">Components</h2>
+    <ul>
+      {navigation.items.map((item)=> {
+        return <li>
+          <a href={item.slug}>{item.label}</a>
+        </li>
+      })}
+    </ul>
+  </nav>
+</aside>

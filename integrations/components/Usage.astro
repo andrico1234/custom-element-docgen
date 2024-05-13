@@ -1,0 +1,20 @@
+---
+const { usage } = Astro.props;
+---
+
+<script is:inline type="module" src={usage.registerPath}></script>
+  
+</script>
+<h2>Usage</h2>
+
+{usage.usages.map((u: any) => {
+  return <div>
+    <h3>{u.name}</h3>
+    <p>{u.description}</p>
+    <div set:html={u.snippet}></div>
+    <p>Code Snippet</p>
+    <pre>
+      <code>{u.snippet}</code>
+    </pre>
+  </div>
+})}

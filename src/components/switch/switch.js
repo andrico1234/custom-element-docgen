@@ -20,7 +20,7 @@ import { html, css, LitElement } from 'lit';
  * @tag test-switch
  */
 
-class Switch extends LitElement {
+class TestSwitch extends LitElement {
   static styles = css`
     * {
       box-sizing: border-box;
@@ -108,4 +108,4 @@ class Switch extends LitElement {
   }
 }
 
-customElements.define('test-switch', Switch);
+customElements.define('test-switch', TestSwitch);

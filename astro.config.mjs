@@ -10,4 +10,7 @@ export default defineConfig({
 			}
 		})
 	],
+	redirects: {
+		'/': '/components/test-button'
+	}
 });

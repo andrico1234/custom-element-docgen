@@ -1,7 +1,7 @@
 import { html, css, LitElement } from 'lit';
 
 /**
- * @attr {boolean} disabled - disables the element
+ * @attr {boolean} disabled - disables the component
  *
  * @csspart button - Styles the color of the button
  *
@@ -9,11 +9,12 @@ import { html, css, LitElement } from 'lit';
  *
  * @cssprop --text-color - Controls the color of the button
  *
- * @prop {boolean} disabled - disables the elememnt
+ * @prop {boolean} disabled - disables the button
  *
  * @event {Event} click - click event
  *
  * @summary This is the button element for the custom library
+ * @description This is the button element for the custom library
  *
  * @tag test-button
  */
@@ -31,14 +32,14 @@ class TestButton extends LitElement {
 
   static properties = {
     disabled: { type: Boolean, reflect: true },
-    label: { type: String }
+    title: { type: String }
   };
 
   render() {
     return html`
       <button part="button" ?disabled=${this.disabled}>
         <slot name="icon"></slot>
-        ${this.label}
+        ${this.title}
       </button>
     `;
   }
