@@ -1,4 +1,4 @@
-import { cli } from '@custom-elements-manifest/analyzer/cli.js'
+import { cli } from '@custom-elements-manifest/analyzer/cli'
 
 export const generateResults = async (path: string) => {
   const result = await cli({

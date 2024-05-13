@@ -1,10 +1,10 @@
 import { defineConfig } from 'astro/config';
-import integration1 from './integrations/integration1'
+import customElementsDocgen from '../index'
 
 // https://astro.build/config
 export default defineConfig({
 	integrations: [
-		integration1({
+		customElementsDocgen({
 			components: {
 				// Layout: './src/layouts/CustomLayout.astro'
 			}
