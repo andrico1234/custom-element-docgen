@@ -12,6 +12,6 @@ declare module 'virtual:components/Layout' {
   export default Layout;
 }
 
-declare module '@custom-elements-manifest/analyzer/cli' {
+declare module '@custom-elements-manifest/analyzer/cli.js' {
   export function cli(args: { argv: string[]; cwd: string; noWrite: boolean }): Promise<any>;
 }

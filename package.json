@@ -3,9 +3,11 @@
   "type": "module",
   "version": "0.0.3",
   "scripts": {
+    "clean": "rimraf dist/",
+    "copy-files": "copyfiles -u 1 components/*.astro dist/components",
     "test": "exit 0",
-    "release": "np",
-    "build": "tsc"
+    "release": "npm run build && np",
+    "build": "npm run clean && tsc && npm run copy-files"
   },
   "dependencies": {
     "@custom-elements-manifest/analyzer": "^0.10.2",
@@ -23,6 +25,8 @@
     "./package.json": "./package.json"
   },
   "devDependencies": {
-    "np": "^10.0.5"
+    "copyfiles": "^2.4.1",
+    "np": "^10.0.5",
+    "rimraf": "^5.0.7"
   }
 }
