@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
-// import customElementsDocgen from 'astro-custom-elements-docgen'
-import customElementsDocgen from '../dist/index.js'
+import customElementsDocgen from 'astro-custom-elements-docgen'
+// import customElementsDocgen from '../dist/index.js'
 
 // https://astro.build/config
 export default defineConfig({
