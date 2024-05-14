@@ -3,8 +3,6 @@ const { usage } = Astro.props;
 ---
 
 <script is:inline type="module" src={usage.registerPath}></script>
-  
-</script>
 <h2>Usage</h2>
 
 {usage.usages.map((u: any) => {
