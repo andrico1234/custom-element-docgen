@@ -100,7 +100,7 @@
       },
       "usage": {
         "tag": "test-button",
-        "registerPath": "/Users/andriccokaroulla/Documents/Coding/component-odyssey/wc-doc-gen/example/src/components/button/button.js",
+        "registerPath": "/Users/andriccokaroulla/Documents/Coding/component-odyssey/wc-doc-gen/example-library/components/button/button.js",
         "usages": [
           {
             "name": "Regular Button",
@@ -217,7 +217,7 @@
       },
       "usage": {
         "tag": "test-switch",
-        "registerPath": "/Users/andriccokaroulla/Documents/Coding/component-odyssey/wc-doc-gen/example/src/components/switch/switch.js",
+        "registerPath": "/Users/andriccokaroulla/Documents/Coding/component-odyssey/wc-doc-gen/example-library/components/switch/switch.js",
         "usages": [
           {
             "name": "Checkbox",

@@ -10,7 +10,6 @@ import { withUsageData } from './usage/withUsageData';
 
 const PAGE_PATTERN = 'components/[component]';
 
-// TODO: what's the best way to handle this?
 const cwd = dirname(fileURLToPath(import.meta.url))
 const PATH_TO_DATA_JSON = join(cwd, './data.json')
 
@@ -21,14 +20,24 @@ const defaultComponents = {
   Page: join(cwd, './components/Page.astro'),
 }
 
+interface Args {
+  components: Record<string, string>,
+  pathToComponents?: string
+}
+
 const createPlugin = ({
   components = {},
-  pathToComponents = './src/components'
-}): AstroIntegration => {
+  pathToComponents,
+}: Args): AstroIntegration => {
   return {
     name: 'custom-elements-docgen',
     hooks: {
       'astro:config:setup': async ({ injectRoute, updateConfig, injectScript, config, logger }) => {
+        if (!pathToComponents) {
+          logger.error('No path to components provided, skipping custom-element-docgen integration.');
+          return;
+        }
+
         const results = await generateResults(pathToComponents);
 
         if (!results) {
@@ -68,10 +77,8 @@ const createPlugin = ({
           const { registerPath } = component.props.usage;
 
           try {
-
-            // TODO: I'm, not able to build scripts dynamically
-            const data = await fs.promises.readFile(registerPath, 'utf8')
-            injectScript('before-hydration', data);
+            // TODO: ensure script is injected within the page it's needed
+            injectScript('page', `import "${registerPath}";`);
           } catch (err) {
             logger.error(`Error reading file: ${registerPath}`);
           }

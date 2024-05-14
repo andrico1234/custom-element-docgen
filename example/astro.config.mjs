@@ -5,9 +5,7 @@ import customElementsDocgen from '../index'
 export default defineConfig({
 	integrations: [
 		customElementsDocgen({
-			components: {
-				// Layout: './src/layouts/CustomLayout.astro'
-			}
+			pathToComponents: '../example-library/components',
 		})
 	],
 	redirects: {
