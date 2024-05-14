@@ -1,12 +1,12 @@
 import { type AstroIntegration } from 'astro'
-import { vitePluginCreateVirtualModules } from './virtual-modules'
-import { generateResults } from './customElementManifest/generateResults';
-import { formatResults } from './customElementManifest/formatResults';
+import { vitePluginCreateVirtualModules } from './virtual-modules.js'
+import { generateResults } from './customElementManifest/generateResults.js';
+import { formatResults } from './customElementManifest/formatResults.js';
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from "node:path";
-import { withPageData } from './routing/withPageData';
-import { withUsageData } from './usage/withUsageData';
+import { withPageData } from './routing/withPageData.js';
+import { withUsageData } from './usage/withUsageData.js';
 
 const PAGE_PATTERN = 'components/[component]';
 
@@ -20,7 +20,7 @@ const defaultComponents = {
   Page: join(cwd, './components/Page.astro'),
 }
 
-interface Args {
+export interface CustomElementsDocGenArgs {
   components: Record<string, string>,
   pathToComponents?: string
 }
@@ -28,7 +28,7 @@ interface Args {
 const createPlugin = ({
   components = {},
   pathToComponents,
-}: Args): AstroIntegration => {
+}: CustomElementsDocGenArgs): AstroIntegration => {
   return {
     name: 'custom-elements-docgen',
     hooks: {

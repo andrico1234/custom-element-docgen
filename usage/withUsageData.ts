@@ -1,5 +1,5 @@
 import fg from 'fast-glob'
-import type { UsageModule } from '../types';
+import type { UsageModule } from '../types.js';
 import { resolve, dirname, join } from "node:path";
 
 async function getUsageData(path: string) {
