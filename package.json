@@ -25,6 +25,7 @@
     "./package.json": "./package.json"
   },
   "devDependencies": {
+    "@open-wc/form-control": "^1.0.0",
     "copyfiles": "^2.4.1",
     "custom-elements-manifest": "^2.1.0",
     "np": "^10.0.5",

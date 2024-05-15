@@ -2,17 +2,35 @@
 import data from '../data.json'
 import Layout from 'virtual:components/Layout'
 import Usage from 'virtual:components/Usage'
+import * as schema from 'custom-elements-manifest/schema'
 
 export async function getStaticPaths() {
   return data
 }
 
-export type AstroProps = typeof Astro.props;
+export type AstroProps = {
+  component: schema.CustomElement
+  navigation: {
+    items: {
+      label: string,
+      slug: string
+    }[],
+  },
+  usage: {
+    tag: string,
+    registerPath: string,
+    usages: {
+      name: string;
+      description: string;
+      snippet: string;
+    }[]
+  }
+};
 
 const { component, navigation, usage } = Astro.props;
 ---
 <Layout component={component} usage={usage} navigation={navigation}>
-<p>
+  <p>
     {component.summary}
   </p>
   
@@ -20,14 +38,15 @@ const { component, navigation, usage } = Astro.props;
     <Usage component={component} usage={usage} navigation={navigation} />
   )}  
 
-  <h2>Attributes</h2>
-  <table>
-    <thead>
-      <th scope="col">Name</th>
-      <th scope="col">Type</th>
-      <th scope="col">Description</th>
-    </thead>
-    <tbody>
+  {Boolean(component.attributes) && (
+    <h2>Attributes</h2>
+    <table>
+      <thead>
+        <th scope="col">Name</th>
+        <th scope="col">Type</th>
+        <th scope="col">Description</th>
+      </thead>
+      <tbody>
       {component.attributes.map((attribute) => {
         return <tr>
           <th scope="row">{attribute.name}</th>
@@ -37,14 +56,16 @@ const { component, navigation, usage } = Astro.props;
       })}
     </tbody>
   </table>
+  )}
 
-  <h2>Slots</h2>
-  <table>
-    <thead>
-      <th scope="col">Name</th>
-      <th scope="col">Description</th>
-    </thead>
-    <tbody>
+  {Boolean(component.slots) && (
+    <h2>Slots</h2>
+    <table>
+      <thead>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+      </thead>
+      <tbody>
       {component.slots.map((slot) => {
         return <tr>
           <th scope="row">{slot.name}</th>
@@ -53,14 +74,16 @@ const { component, navigation, usage } = Astro.props;
       })}
     </tbody>
   </table>
+  )}
 
-  <h2>CSS Properties</h2>
-  <table>
-    <thead>
-      <th scope="col">Name</th>
-      <th scope="col">Description</th>
-    </thead>
-    <tbody>
+  {Boolean(component.cssProperties) && (
+    <h2>CSS Properties</h2>
+    <table>
+      <thead>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+      </thead>
+      <tbody>
       {component.cssProperties.map((property) => {
         return <tr>
           <th scope="row">{property.name}</th>
@@ -69,37 +92,42 @@ const { component, navigation, usage } = Astro.props;
       })}
     </tbody>
   </table>
+  )}
 
-  <h2>CSS Parts</h2>
-  <table>
-    <thead>
-      <th scope="col">Name</th>
-      <th scope="col">Description</th>
-    </thead>
-    <tbody>
-      {component.cssParts.map((part) => {
-        return <tr>
-          <th scope="row">{part.name}</th>
-          <td>{part.description ?? '-'}</td>
-        </tr>
-      })}
-    </tbody>
-  </table>
+  {Boolean(component.cssParts) && (
+    <h2>CSS Parts</h2>
+    <table>
+      <thead>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+      </thead>
+      <tbody>
+        {component.cssParts.map((part) => {
+          return <tr>
+            <th scope="row">{part.name}</th>
+            <td>{part.description ?? '-'}</td>
+          </tr>
+        })}
+      </tbody>
+    </table>
+  )}
 
-  <h2>Events</h2>
-  <table>
-    <thead>
-      <th scope="col">Name</th>
-      <th scope="col">Description</th>
-    </thead>
-    <tbody>
-      {component.events.map((event) => {
-        return <tr>
-          <th scope="row">{event.name}</th>
-          <td>{event.description ?? '-'}</td>
-        </tr>
-      })}
-    </tbody>
-  </table>
+  {Boolean(component.events) && (
+    <h2>Events</h2>
+    <table>
+      <thead>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+      </thead>
+      <tbody>
+        {component.events.map((event) => {
+          return <tr>
+            <th scope="row">{event.name}</th>
+            <td>{event.description ?? '-'}</td>
+          </tr>
+        })}
+      </tbody>
+    </table>
+  )}
 </Layout>
   
