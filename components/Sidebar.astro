@@ -1,12 +1,7 @@
 ---
-interface Props {
-  navigation: {
-    items: {
-      label: string;
-      slug: string;
-    }[]
-  }
-}
+import { AstroProps } from './Page.astro';
+
+type Props = AstroProps;
 
 const { navigation } = Astro.props;
 

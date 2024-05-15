@@ -1,6 +1,19 @@
 import fg from 'fast-glob'
-import type { UsageModule } from '../types.js';
 import { resolve, dirname, join } from "node:path";
+
+type Usage = {
+  title: string;
+  description: string;
+  snippet: string;
+  tag: string;
+}
+
+type UsageModule = {
+  tag: string;
+  registerPath: string;
+  usages: Usage[];
+}
+
 
 async function getUsageData(path: string) {
   const filePaths = fg.sync(`${path}/**/*.example.{js,ts}`);

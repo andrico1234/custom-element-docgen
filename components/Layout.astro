@@ -1,8 +1,11 @@
 ---
 import Sidebar from 'virtual:components/Sidebar'
 import '../prism/prism.css'
+import { AstroProps } from './Page.astro';
 
-const { title, navigation } = Astro.props;
+type Props = AstroProps;
+
+const { component, navigation, usage } = Astro.props;
 ---
 <html lang="en">
   <head>
@@ -85,11 +88,11 @@ const { title, navigation } = Astro.props;
   </head>
   <body class="with-sidebar container">
     <div class="sidebar">
-      <Sidebar navigation={navigation} />
+      <Sidebar component={component} usage={usage} navigation={navigation} />
     </div>
     <div class="not-sidebar">
       <main >
-        <h1>{title}</h1>
+        <h1>{`${component.name} - <${component.tagName}>`}</h1>
           <slot /> <!-- your content is injected here -->
       </main>
     </div>

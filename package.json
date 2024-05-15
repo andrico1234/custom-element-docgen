@@ -4,7 +4,7 @@
   "version": "0.0.4",
   "scripts": {
     "clean": "rimraf dist/",
-    "copy-files": "copyfiles -u 1 components/*.astro dist/components",
+    "copy-files": "copyfiles components/*.astro prism/*.css dist/",
     "test": "exit 0",
     "release": "npm run build && np",
     "build": "npm run clean && tsc && npm run copy-files"
@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "copyfiles": "^2.4.1",
+    "custom-elements-manifest": "^2.1.0",
     "np": "^10.0.5",
     "rimraf": "^5.0.7"
   }

@@ -21,12 +21,12 @@ const defaultComponents = {
 }
 
 export interface CustomElementsDocGenArgs {
-  components: Record<string, string>,
+  astroComponents: Record<string, string>,
   pathToComponents?: string
 }
 
 const createPlugin = ({
-  components = {},
+  astroComponents: components = {},
   pathToComponents,
 }: CustomElementsDocGenArgs): AstroIntegration => {
   return {

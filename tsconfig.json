@@ -11,6 +11,7 @@
     "skipLibCheck": true,
     "moduleResolution": "node16",
     "declaration": true,
+    "verbatimModuleSyntax": true,
 
     "outDir": "./dist",
     "typeRoots": ["node_modules/@types", "./types"]

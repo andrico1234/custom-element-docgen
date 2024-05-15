@@ -7,15 +7,17 @@ export async function getStaticPaths() {
   return data
 }
 
+export type AstroProps = typeof Astro.props;
+
 const { component, navigation, usage } = Astro.props;
 ---
-<Layout title={`${component.name} - <${component.tagName}>`} navigation={navigation}>
-  <p>
+<Layout component={component} usage={usage} navigation={navigation}>
+<p>
     {component.summary}
   </p>
   
   {Boolean(usage.usages.length) && (
-    <Usage usage={usage} />
+    <Usage component={component} usage={usage} navigation={navigation} />
   )}  
 
   <h2>Attributes</h2>

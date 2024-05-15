@@ -1,4 +1,16 @@
-export function formatResults(entries: any[]) {
+import * as schema from 'custom-elements-manifest'
+
+type ComponentData = {
+  params: {
+    component: string;
+  };
+  props: {
+    component: schema.CustomElement;
+  };
+
+}
+
+export function formatResults(entries: any[]): ComponentData[] {
   const filteredEntries = entries.filter((entry) => {
     if (!entry.declarations.length) return false
     const declaration = entry.declarations[0];
