@@ -1,0 +1,16 @@
+:root,
+:host {
+  color-scheme: light;
+  
+  --sl-color-gray-200: hsl(240 4.6% 22%);
+
+  --sl-color-neutral-0: hsl(240, 5.9%, 11%);
+  --sl-color-neutral-200: var(--sl-color-gray-200);
+  
+  --sl-border-radius-medium: 0.25rem;
+  --sl-spacing-x-small: 0.5rem;
+
+  --sl-panel-background-color: var(--sl-color-neutral-0);
+  --sl-panel-border-color: var(--sl-color-neutral-200);
+  --sl-panel-border-width: 1px;
+}

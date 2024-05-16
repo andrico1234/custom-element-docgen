@@ -1,6 +1,6 @@
 export default {
   tag: 'test-switch',
-  registerPath: './switch.js',
+  registerPaths: './switch.js',
   usages: [
     {
       name: 'Checkbox',

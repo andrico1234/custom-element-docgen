@@ -10,10 +10,34 @@ type Usage = {
 
 type UsageModule = {
   tag: string;
-  registerPath: string;
+  registerPaths: string | string[];
   usages: Usage[];
 }
 
+function getPathType(path: string) {
+  if (path.startsWith('./') || path.startsWith('../')) {
+    return 'relative';
+  } else if (path.startsWith('/')) {
+    return 'absolute';
+  } else {
+    return 'module';
+  }
+}
+
+async function getPathsForComponents(pathOrPaths: string | string[], fileDir: string) {
+  const paths = Array.isArray(pathOrPaths) ? pathOrPaths : [pathOrPaths];
+
+  const registerPaths = paths.map((p) => {
+    if (getPathType(p) === 'relative') {
+      return join(fileDir, p);
+    }
+
+    return p;
+  })
+
+
+  return registerPaths;
+}
 
 async function getUsageData(path: string) {
   const filePaths = fg.sync(`${path}/**/*.example.{js,ts}`);
@@ -24,12 +48,12 @@ async function getUsageData(path: string) {
   for await (const filePath of absolutePaths) {
     const usageModule = await import(/* @vite-ignore */ filePath);
     const fileDir = dirname(filePath);
-    const usage = usageModule.default;
-    const registerPath = join(fileDir, usage.registerPath);
+    const usage = usageModule.default as UsageModule;
+    const registerPaths = await getPathsForComponents(usage.registerPaths, fileDir);
 
     usages.push({
       ...usage,
-      registerPath
+      registerPaths
     });
   }
 

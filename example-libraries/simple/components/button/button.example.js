@@ -1,6 +1,6 @@
 export default {
   tag: 'test-button',
-  registerPath: './button.js',
+  registerPaths: './button.js',
   usages: [{
     name: 'Regular Button',
     description: "How to use the button",

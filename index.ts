@@ -77,10 +77,12 @@ const createPlugin = ({
         })
 
         resultsWithUsageData.forEach((component) => {
-          const { registerPath } = component.props.usage;
+          const registerPaths = component.props.usage.registerPaths as string[];
           
-          // TODO: ensure script is injected within the page it's needed
-          injectScript('page', `import "${registerPath}";`);
+          registerPaths.forEach((p) => {
+            // TODO: ensure script is injected within the page it's needed
+            injectScript('page', `import "${p}";`);
+          })
         })
                 
         const absoluteStylePaths = getAbsoluteStylePaths(pathToStyles);

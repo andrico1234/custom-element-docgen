@@ -1,6 +1,6 @@
 export default {
   tag: 'a2k-button',
-  registerPath: './a2k-button.ts',
+  registerPaths: './a2k-button.ts',
   usages: [{
     name: 'Button',
     description: "Using A2K Button",

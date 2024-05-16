@@ -7,7 +7,6 @@ pre[class*=language-] {
   color: var(--pico-code-color);
   font-weight: var(--pico-font-weight);
   line-height: initial;
-  white-space: pre-line;
 }
 
 code[class*=language-] ::-moz-selection,

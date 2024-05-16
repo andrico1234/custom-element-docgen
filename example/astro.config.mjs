@@ -7,9 +7,8 @@ import lit from "@astrojs/lit";
 // https://astro.build/config
 export default defineConfig({
 	integrations: [customElementsDocgen({
-		// componentsDir: '../example-libraries/sim`ple/components',
-		componentsDir: '../example-libraries/a2k',
-		pathToStyles: '../example-libraries/a2k/styles/styles.css'
+		componentsDir: '../example-libraries',
+		pathToStyles: ['../example-libraries/a2k/styles/styles.css', '../example-libraries/a2k/styles/styles.css']
 	}), lit()],
 	redirects: {
 		'/': '/components/test-button'

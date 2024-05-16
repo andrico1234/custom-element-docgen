@@ -3,12 +3,13 @@ import data from '../data.json'
 import Layout from 'virtual:components/Layout'
 import Usage from 'virtual:components/Usage'
 import * as schema from 'custom-elements-manifest/schema'
+import{ isDefined } from  '../helpers/isDefined'
 
 export async function getStaticPaths() {
   return data
 }
 
-export type AstroProps = {
+export type Props = {
   component: schema.CustomElement
   navigation: {
     items: {
@@ -18,7 +19,7 @@ export type AstroProps = {
   },
   usage: {
     tag: string,
-    registerPath: string,
+    registerPaths: string,
     usages: {
       name: string;
       description: string;
@@ -27,7 +28,10 @@ export type AstroProps = {
   }
 };
 
+export type AstroProps = Props;
+
 const { component, navigation, usage } = Astro.props;
+const { attributes, slots, cssProperties, cssParts, events } = component
 ---
 <Layout component={component} usage={usage} navigation={navigation}>
   <p>
@@ -38,7 +42,7 @@ const { component, navigation, usage } = Astro.props;
     <Usage component={component} usage={usage} navigation={navigation} />
   )}  
 
-  {Boolean(component.attributes) && (
+  {isDefined(attributes) && (
     <h2>Attributes</h2>
     <table>
       <thead>
@@ -47,10 +51,10 @@ const { component, navigation, usage } = Astro.props;
         <th scope="col">Description</th>
       </thead>
       <tbody>
-      {component.attributes.map((attribute) => {
+      {attributes.map((attribute) => {
         return <tr>
           <th scope="row">{attribute.name}</th>
-          <td>{attribute.type.text}</td>
+          <td>{attribute.type?.text ?? 'string'}</td>
           <td>{attribute.description ?? '-'}</td>
         </tr>
       })}
@@ -58,7 +62,7 @@ const { component, navigation, usage } = Astro.props;
   </table>
   )}
 
-  {Boolean(component.slots) && (
+  {isDefined(slots) && (
     <h2>Slots</h2>
     <table>
       <thead>
@@ -66,9 +70,9 @@ const { component, navigation, usage } = Astro.props;
         <th scope="col">Description</th>
       </thead>
       <tbody>
-      {component.slots.map((slot) => {
+      {slots.map((slot) => {
         return <tr>
-          <th scope="row">{slot.name}</th>
+          <th scope="row">{slot.name || "(default)"}</th>
           <td>{slot.description ?? '-'}</td>
         </tr>
       })}
@@ -76,7 +80,7 @@ const { component, navigation, usage } = Astro.props;
   </table>
   )}
 
-  {Boolean(component.cssProperties) && (
+  {isDefined(cssProperties) && (
     <h2>CSS Properties</h2>
     <table>
       <thead>
@@ -84,7 +88,7 @@ const { component, navigation, usage } = Astro.props;
         <th scope="col">Description</th>
       </thead>
       <tbody>
-      {component.cssProperties.map((property) => {
+      {cssProperties.map((property) => {
         return <tr>
           <th scope="row">{property.name}</th>
           <td>{property.description ?? '-'}</td>
@@ -94,7 +98,7 @@ const { component, navigation, usage } = Astro.props;
   </table>
   )}
 
-  {Boolean(component.cssParts) && (
+  {isDefined(cssParts) && (
     <h2>CSS Parts</h2>
     <table>
       <thead>
@@ -102,7 +106,7 @@ const { component, navigation, usage } = Astro.props;
         <th scope="col">Description</th>
       </thead>
       <tbody>
-        {component.cssParts.map((part) => {
+        {cssParts.map((part) => {
           return <tr>
             <th scope="row">{part.name}</th>
             <td>{part.description ?? '-'}</td>
@@ -112,7 +116,7 @@ const { component, navigation, usage } = Astro.props;
     </table>
   )}
 
-  {Boolean(component.events) && (
+  {isDefined(events) && (
     <h2>Events</h2>
     <table>
       <thead>
@@ -120,7 +124,7 @@ const { component, navigation, usage } = Astro.props;
         <th scope="col">Description</th>
       </thead>
       <tbody>
-        {component.events.map((event) => {
+        {events.map((event) => {
           return <tr>
             <th scope="row">{event.name}</th>
             <td>{event.description ?? '-'}</td>
