@@ -7,6 +7,7 @@
     "copy-files": "copyfiles components/*.astro prism/*.css dist/",
     "test": "exit 0",
     "release": "npm run build && np",
+    "dev": "onchange 'index.ts' 'components/*.astro' -- npm run build",
     "build": "npm run clean && tsc && npm run copy-files"
   },
   "dependencies": {
@@ -29,6 +30,7 @@
     "copyfiles": "^2.4.1",
     "custom-elements-manifest": "^2.1.0",
     "np": "^10.0.5",
+    "onchange": "^7.1.0",
     "rimraf": "^5.0.7"
   }
 }

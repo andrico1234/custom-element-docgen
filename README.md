@@ -18,7 +18,7 @@ Jump over to your `astro.config.mjs` file and add the integration:
 export default defineConfig({
   integrations: [
     customElementsDocgen({
-      pathToComponents: "../path-to-your-web-components-folder",
+      componentsDir: "../path-to-your-web-components-folder",
     }),
   ],
 });
@@ -26,7 +26,7 @@ export default defineConfig({
 
 ## Options
 
-### `pathToComponents` (required)
+### `componentsDir` (required)
 
 **type** `string`
 
@@ -82,3 +82,9 @@ type AstroProps = {
 ```
 
 type CustomElement is defined in the [custom-elements-manifest](https://github.com/webcomponents/custom-elements-manifest?tab=readme-ov-file) schema.
+
+### `pathToSyles`
+
+**type** `string | string[]`
+
+Paths to CSS files that will be included in the generated site.

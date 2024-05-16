@@ -37,12 +37,12 @@ async function getUsageData(path: string) {
 }
 
 export async function withUsageData(data: any[], {
-  pathToComponents
+  componentsDir
 }: {
-  pathToComponents: string;
+  componentsDir: string;
 }) {
   const updatedData: any[] = []
-  const usages = await getUsageData(pathToComponents);
+  const usages = await getUsageData(componentsDir);
 
   for await (const page of data) {
     const usage = usages.find((u) => {

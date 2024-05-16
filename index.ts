@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from "node:path";
 import { withPageData } from './routing/withPageData.js';
 import { withUsageData } from './usage/withUsageData.js';
+import { getAbsoluteStylePaths } from './styles/getAbsoluteStylePaths.js';
 
 const PAGE_PATTERN = 'components/[component]';
 
@@ -22,23 +23,25 @@ const defaultComponents = {
 
 export interface CustomElementsDocGenArgs {
   astroComponents: Record<string, string>,
-  pathToComponents?: string
+  componentsDir?: string,
+  pathToStyles?: string[] | string,
 }
 
 const createPlugin = ({
   astroComponents: components = {},
-  pathToComponents,
+  componentsDir,
+  pathToStyles = [],
 }: CustomElementsDocGenArgs): AstroIntegration => {
   return {
     name: 'custom-elements-docgen',
     hooks: {
       'astro:config:setup': async ({ injectRoute, updateConfig, injectScript, config, logger }) => {
-        if (!pathToComponents) {
+        if (!componentsDir) {
           logger.error('No path to components provided, skipping custom-element-docgen integration.');
           return;
         }
 
-        const results = await generateResults(pathToComponents);
+        const results = await generateResults(componentsDir);
 
         if (!results) {
           // TODO: beter error handling
@@ -53,7 +56,7 @@ const createPlugin = ({
 
         const formattedResults = formatResults(results.modules);
         const resultsWithPageData = withPageData(formattedResults);
-        const resultsWithUsageData = await withUsageData(resultsWithPageData, { pathToComponents });
+        const resultsWithUsageData = await withUsageData(resultsWithPageData, { componentsDir });
 
         fs.writeFileSync(PATH_TO_DATA_JSON, JSON.stringify(resultsWithUsageData, null, 2));
 
@@ -73,16 +76,18 @@ const createPlugin = ({
           entrypoint: mergedComponents.Page
         })
 
-        for await (const component of resultsWithUsageData) {
+        resultsWithUsageData.forEach((component) => {
           const { registerPath } = component.props.usage;
+          
+          // TODO: ensure script is injected within the page it's needed
+          injectScript('page', `import "${registerPath}";`);
+        })
+                
+        const absoluteStylePaths = getAbsoluteStylePaths(pathToStyles);
 
-          try {
-            // TODO: ensure script is injected within the page it's needed
-            injectScript('page', `import "${registerPath}";`);
-          } catch (err) {
-            logger.error(`Error reading file: ${registerPath}`);
-          }
-        }
+        absoluteStylePaths.forEach((path) => {
+          injectScript('page-ssr', `import "${path}";`);
+        })
       }
     }
   }
