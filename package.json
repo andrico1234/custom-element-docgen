@@ -4,7 +4,7 @@
   "version": "0.0.6",
   "scripts": {
     "clean": "rimraf dist/",
-    "copy-files": "copyfiles components/*.astro prism/*.css dist/",
+    "copy-files": "copyfiles src/**/*.astro src/**/*.css dist/",
     "test": "exit 0",
     "release": "npm run build && np",
     "dev": "onchange 'index.ts' 'components/*.astro' -- npm run build",

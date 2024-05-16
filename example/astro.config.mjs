@@ -8,7 +8,7 @@ import lit from "@astrojs/lit";
 export default defineConfig({
 	integrations: [customElementsDocgen({
 		componentsDir: '../example-libraries',
-		pathToStyles: ['../example-libraries/a2k/styles/styles.css', '../example-libraries/a2k/styles/styles.css']
+		pathToStyles: ['../example-libraries/a2k/styles/styles.css', '../example-libraries/shoelace/styles/styles.css']
 	}), lit()],
 	redirects: {
 		'/': '/components/test-button'
@@ -21,6 +21,7 @@ export default defineConfig({
 					experimentalDecorators: true,
 					useDefineForClassFields: false,
 				},
+				
 			},
 		}
 	}
