@@ -24,7 +24,7 @@
   "exports": {
     ".": "./dist/index.js",
     "./package.json": "./package.json",
-    "./types.ts": "./dist/types/types.ts"
+    "./types.ts": "./dist/types/types.d.ts"
   },
   "devDependencies": {
     "@lion/ui": "^0.7.2",

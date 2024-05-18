@@ -1,7 +1,7 @@
-import * as schema from 'custom-elements-manifest'
+import type { CustomElement } from 'custom-elements-manifest'
 
 export type AstroProps = {
-  component: schema.CustomElement
+  component: CustomElement
   navigation: {
     items: {
       label: string,
