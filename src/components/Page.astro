@@ -2,33 +2,14 @@
 import data from '../data.json'
 import Layout from 'virtual:components/Layout'
 import Usage from 'virtual:components/Usage'
-import * as schema from 'custom-elements-manifest/schema'
 import { isDefined } from  '../helpers/isDefined'
+import type { AstroProps } from '../../types/types'
 
 export async function getStaticPaths() {
   return data
 }
 
-export type Props = {
-  component: schema.CustomElement
-  navigation: {
-    items: {
-      label: string,
-      slug: string
-    }[],
-  },
-  usage: {
-    tag: string,
-    registerPaths: string,
-    usages: {
-      name: string;
-      description: string;
-      snippet: string;
-    }[]
-  }
-};
-
-export type AstroProps = Props;
+type Props = AstroProps;
 
 const { component, navigation, usage } = Astro.props;
 const { attributes, slots, cssProperties, cssParts, events } = component
