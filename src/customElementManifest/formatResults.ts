@@ -1,11 +1,11 @@
-import type { CustomElement } from 'custom-elements-manifest'
+import * as schema  from 'custom-elements-manifest'
 
 type ComponentData = {
   params: {
     component: string;
   };
   props: {
-    component: CustomElement;
+    component: schema.CustomElement;
   };
 
 }
