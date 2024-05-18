@@ -7,7 +7,6 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from "node:path";
 import { withPageData } from './src/routing/withPageData.js';
 import { withUsageData } from './src/usage/withUsageData.js';
-import { getAbsolutePathsForImports } from './src/helpers/getAbsolutePathsForImports.js';
 
 const PAGE_PATTERN = 'components/[component]';
 
@@ -25,15 +24,11 @@ const defaultComponents = {
 export interface CustomElementsDocGenArgs {
   astroComponents: Record<string, string>,
   componentsDir?: string,
-
-  // TODO: Handle this inside of the head
-  pathToStyles?: string[] | string,
 }
 
 const createPlugin = ({
   astroComponents: components = {},
   componentsDir,
-  pathToStyles = [],
 }: CustomElementsDocGenArgs): AstroIntegration => {
   return {
     name: 'custom-elements-docgen',
@@ -85,12 +80,6 @@ const createPlugin = ({
             // TODO: ensure script is injected within the page it's needed
             injectScript('page', `import "${p}";`);
           })
-        })
-
-        const stylePaths = await getAbsolutePathsForImports(pathToStyles)
-
-        stylePaths.forEach((path) => {
-          injectScript('page-ssr', `import "${path}";`);
         })
       }
     }

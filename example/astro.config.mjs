@@ -8,7 +8,9 @@ import lit from "@astrojs/lit";
 export default defineConfig({
 	integrations: [customElementsDocgen({
 		componentsDir: '../example-libraries',
-		pathToStyles: ['../example-libraries/a2k/styles/styles.css', '@shoelace-style/shoelace/dist/themes/dark.css']
+		astroComponents: {
+			Head: './src/components/Head.astro'
+		}
 	}), lit()],
 	redirects: {
 		'/': '/components/test-button'

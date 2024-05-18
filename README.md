@@ -90,12 +90,6 @@ type AstroProps = {
 
 type CustomElement is defined in the [custom-elements-manifest](https://github.com/webcomponents/custom-elements-manifest?tab=readme-ov-file) schema.
 
-### `pathToSyles`
-
-**type** `string | string[]`
-
-Paths to CSS files that will be included in the generated site.
-
 ## Providing Examples
 
 To provide examples for your custom elements, you will need to create an adjacent "[component-name].examples.js" file.
@@ -157,3 +151,8 @@ An array of objects that describe the examples.
 - `name` - The name of the example
 - `description` - A description of the example
 - `snippet` - The HTML snippet of the example
+
+
+## TODOs
+
+- [ ] Handle existing manifests
