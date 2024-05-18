@@ -1,13 +1,13 @@
 import { type AstroIntegration } from 'astro'
 import { vitePluginCreateVirtualModules } from './virtual-modules.js'
-import { generateResults } from './src/customElementManifest/generateResults.js';
+import { generateManifest } from './src/customElementManifest/generateManifest.js';
 import { formatResults } from './src/customElementManifest/formatResults.js';
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from "node:path";
 import { withPageData } from './src/routing/withPageData.js';
 import { withUsageData } from './src/usage/withUsageData.js';
-import { getAbsoluteStylePaths } from './styles/getAbsoluteStylePaths.js';
+import { getAbsolutePathsForImports } from './src/helpers/getAbsolutePathsForImports.js';
 
 const PAGE_PATTERN = 'components/[component]';
 
@@ -19,11 +19,14 @@ const defaultComponents = {
   Sidebar: join(cwd, './src/components/Sidebar.astro'),
   Usage: join(cwd, './src/components/Usage.astro'),
   Page: join(cwd, './src/components/Page.astro'),
+  Head: join(cwd, './src/components/Head.astro'),
 }
 
 export interface CustomElementsDocGenArgs {
   astroComponents: Record<string, string>,
   componentsDir?: string,
+
+  // TODO: Handle this inside of the head
   pathToStyles?: string[] | string,
 }
 
@@ -41,24 +44,23 @@ const createPlugin = ({
           return;
         }
 
-        const results = await generateResults(componentsDir);
+        const cemManifest = await generateManifest(componentsDir);
 
-        if (!results) {
-          // TODO: beter error handling
+        if (!cemManifest) {
           logger.error('No components could be found, skipping custom-element-docgen integration.');
           return;
         }
+
+        const formattedResults = formatResults(cemManifest.modules);
+        const resultsWithPageData = withPageData(formattedResults);
+        const resultsWithUsageData = await withUsageData(resultsWithPageData, { componentsDir });
+
+        fs.writeFileSync(PATH_TO_DATA_JSON, JSON.stringify(resultsWithUsageData, null, 2));
 
         const mergedComponents = {
           ...defaultComponents,
           ...components
         }
-
-        const formattedResults = formatResults(results.modules);
-        const resultsWithPageData = withPageData(formattedResults);
-        const resultsWithUsageData = await withUsageData(resultsWithPageData, { componentsDir });
-
-        fs.writeFileSync(PATH_TO_DATA_JSON, JSON.stringify(resultsWithUsageData, null, 2));
 
         updateConfig({
           vite: {
@@ -78,16 +80,16 @@ const createPlugin = ({
 
         resultsWithUsageData.forEach((component) => {
           const registerPaths = component.props.usage.registerPaths as string[];
-          
+
           registerPaths.forEach((p) => {
             // TODO: ensure script is injected within the page it's needed
             injectScript('page', `import "${p}";`);
           })
         })
-                
-        const absoluteStylePaths = getAbsoluteStylePaths(pathToStyles);
 
-        absoluteStylePaths.forEach((path) => {
+        const stylePaths = await getAbsolutePathsForImports(pathToStyles)
+
+        stylePaths.forEach((path) => {
           injectScript('page-ssr', `import "${path}";`);
         })
       }

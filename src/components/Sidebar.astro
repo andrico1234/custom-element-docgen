@@ -12,7 +12,6 @@ const currentPath = Astro.url.pathname
     <summary>Components</summary>
     <ul>
       {navigation.items.map((item)=> {
-        // TODO: get current page
         return <li>
           <a aria-current={currentPath === item.slug ? true : undefined} href={item.slug}>{item.label}</a>
         </li>

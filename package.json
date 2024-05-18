@@ -7,7 +7,7 @@
     "copy-files": "copyfiles src/**/*.astro src/**/*.css dist/",
     "test": "exit 0",
     "release": "npm run build && np",
-    "dev": "onchange 'index.ts' 'components/*.astro' -- npm run build",
+    "dev": "npm run build && onchange 'index.ts' 'src/**/*' -- npm run build",
     "build": "npm run clean && tsc && npm run copy-files"
   },
   "dependencies": {

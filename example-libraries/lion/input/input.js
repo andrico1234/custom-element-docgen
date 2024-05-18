@@ -37,7 +37,6 @@ export class LionInput extends NativeTextFieldMixin(LionField) {
     return {
       ...super.slots,
       input: () => {
-        // TODO: Find a better way to do value delegation via attr
         const native = document.createElement('input');
         const value = this.getAttribute('value');
         if (value) {
