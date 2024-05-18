@@ -1,7 +1,7 @@
 {
   "name": "astro-custom-elements-docgen",
   "type": "module",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "scripts": {
     "clean": "rimraf dist/",
     "copy-files": "copyfiles src/**/*.astro src/**/*.css dist/",
