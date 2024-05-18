@@ -17,13 +17,14 @@ type UsageModule = {
 
 
 async function getUsageData(path: string) {
-  const filePaths = fg.sync(`${path}/**/*.example.{js,ts}`);
+  // TODO: fix this so it also supports TS files
+  const filePaths = fg.sync(`${path}/**/*.example.js`);
   const absolutePaths = filePaths.map((p) => resolve(p));
 
   const usages: UsageModule[] = []
 
   for await (const filePath of absolutePaths) {
-    const usageModule = await import(/* @vite-ignore */ filePath);
+    const usageModule = await import(filePath);
     const fileDir = dirname(filePath);
     const usage = usageModule.default as UsageModule;
     const registerPaths = await getPathsForImports(usage.registerPaths, fileDir);

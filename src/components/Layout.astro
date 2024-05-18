@@ -9,15 +9,13 @@ const { component, navigation, usage } = Astro.props;
 ---
 <html lang="en">
   <Head component={component} navigation={navigation} usage={usage} />
-  <body class="with-sidebar container">
+  <body class="container">
     <div class="sidebar">
       <Sidebar component={component} usage={usage} navigation={navigation} />
     </div>
-    <div class="not-sidebar">
-      <main>
-        <h1>{`${component.name} - <${component.tagName}>`}</h1>
-          <slot /> <!-- your content is injected here -->
-      </main>
-    </div>
+    <main class="main-content">
+      <h1>{`${component.name} - <${component.tagName}>`}</h1>
+        <slot /> <!-- your content is injected here -->
+    </main>
   </body>
 </html>

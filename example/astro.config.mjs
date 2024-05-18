@@ -23,8 +23,7 @@ export default defineConfig({
 					experimentalDecorators: true,
 					useDefineForClassFields: false,
 				},
-				
 			},
-	}
+		}
 	}
 });

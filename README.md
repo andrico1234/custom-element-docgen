@@ -156,3 +156,4 @@ An array of objects that describe the examples.
 ## TODOs
 
 - [ ] Handle existing manifests
+- [ ] Support TS for the example files
