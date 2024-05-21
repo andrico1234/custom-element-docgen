@@ -50,6 +50,7 @@ Used if you want to override the layout of generated site.
 There are four components that can be overridden:
 
 - Layout
+- Head
 - Sidebar
 - Usage
 - Page
@@ -60,10 +61,13 @@ customElementsDocgen({
     Layout: "./components/Layout.astro",
     Sidebar: "./components/Sidebar.astro",
     Usage: "./components/Usage.astro",
+    Head: "./components/Head.astro",
     Page: "./components/Page.astro",
   },
 });
 ```
+
+> Note: Head is a great place to import any styles or scripts you need for your components.
 
 Every component receives the following props:
 
@@ -157,3 +161,4 @@ An array of objects that describe the examples.
 
 - [ ] Handle existing manifests
 - [ ] Support TS for the example files
+- [ ] Support compiled web component tools, like Stencil

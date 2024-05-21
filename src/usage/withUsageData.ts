@@ -52,6 +52,7 @@ export async function withUsageData(data: any[], {
     });
 
     if (!usage) {
+      updatedData.push(page);
       continue;
     }
 

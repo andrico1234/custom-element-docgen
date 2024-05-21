@@ -74,6 +74,9 @@ const createPlugin = ({
         })
 
         resultsWithUsageData.forEach((component) => {
+          if (!component.props.usage) {
+            return;
+          }
           const registerPaths = component.props.usage.registerPaths as string[];
 
           registerPaths.forEach((p) => {

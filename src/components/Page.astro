@@ -19,7 +19,7 @@ const { attributes, slots, cssProperties, cssParts, events } = component
     {component.summary}
   </p>
   
-  {Boolean(usage.usages.length) && (
+  {Boolean(usage?.usages.length) && (
     <Usage component={component} usage={usage} navigation={navigation} />
   )}  
 
