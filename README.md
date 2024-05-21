@@ -55,11 +55,9 @@ This sets the path to your web components directory.
 
 **type** `Record<string, string>`
 
-Paths to Astro components that override the default Astro components.
+The integration automatically generates documentation for your custom elements. If you don't like the default appearance of the components, you can provide paths to your own components.
 
-Used if you want to override the layout of generated site.
-
-There are four components that can be overridden:
+You can override the following components:
 
 - Layout
 - Head
@@ -171,6 +169,6 @@ An array of objects that describe the examples.
 
 ## TODOs
 
-- [ ] Handle existing manifests
+- [ ] Handle libraries with existing manifests
 - [ ] Support TS for the example files
 - [ ] Support compiled web component tools, like Stencil
