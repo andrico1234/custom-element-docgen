@@ -1,6 +1,16 @@
 # Custom Elements Docgen (Astro Integration)
 
-Whip up Astro documentation for your custom elements
+An Astro integration to automatically generate documentation for your custom elements.- [Custom Elements Docgen (Astro Integration)](#custom-elements-docgen-astro-integration)
+
+  - [Installation](#installation)
+  - [Options](#options)
+    - [`componentsDir` (required)](#componentsdir-required)
+    - [`astroComponents`](#astrocomponents)
+  - [Providing Examples](#providing-examples)
+    - [`tag` (required)](#tag-required)
+    - [`registerPaths` (required)](#registerpaths-required)
+    - [`usages` (required)](#usages-required)
+  - [TODOs](#todos)
 
 ## Installation
 
@@ -26,9 +36,11 @@ export default defineConfig({
 
 If you provide a link to your components directory, the integration will generate documentation for your custom elements.
 
-The integration won't automatically generate examples. Instead you will need to create an adjacent "[component-name].examples.ts" file to provide examples for your custom elements.
+The integration won't automatically generate examples. Instead you will need to create an adjacent "[component-name].examples.js" file to provide examples for your custom elements.
 
 See [providing examples](#providing-examples) for more information.
+
+To see the integration in action, you can navigate to the [`example` directory](./example/README.md)
 
 
 ## Options
