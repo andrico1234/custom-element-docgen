@@ -18,7 +18,9 @@ type UsageModule = {
 
 async function getUsageData(path: string) {
   // TODO: fix this so it also supports TS files
-  const filePaths = fg.sync(`${path}/**/*.example.js`);
+  const filePaths = fg.sync(`${path}/**/*.example.js`, {
+    ignore: [`${path}/**/node_modules`]
+  });
   const absolutePaths = filePaths.map((p) => resolve(p));
 
   const usages: UsageModule[] = []
